@@ -21,7 +21,7 @@ class PhoneForm extends Component {
         this.setState({
             name: '',
             phone: '',
-        })
+        });
     }
 
     render() {

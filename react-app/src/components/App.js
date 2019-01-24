@@ -1,10 +1,11 @@
 import React, { Component } from "react";
+import Contact from "./Contact";
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <h1>hello</h1>
+        <Contact />
       </div>
     );
   }

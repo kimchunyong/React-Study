@@ -4,7 +4,9 @@ class contactInfo extends Component {
   render() {
     return (
       <div>
-        <div>4444</div>
+        <div>
+          {this.props.contact.name} {this.props.contact.phone}
+        </div>
       </div>
     );
   }

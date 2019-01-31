@@ -38,6 +38,14 @@ npm install react react-dom
 
 이러한 이유로 페이스북은 누구나 손쉽게 환경 설정 작업을 할 수 있는 제로 구성 설치(zero-configuration) 솔루션인 _create-react-app_ 패키지를 만들었습니다. 우리는 이 패키지로 리액트 애플리케이션을 만들어 볼 것입니다.
 
+_create-react-app_ 사용법
+
+```
+npm create-react-app my-app
+cd my-app
+npm start
+```
+
 ### 읽어보기
 
 - [[리액트 공식 문서] 리액트 설치](https://reactjs.org/docs/try-react.html)

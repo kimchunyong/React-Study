@@ -62,4 +62,4 @@ npm start
 - React는 Vue.js에 비해 플레인 자바스크립트에 더 가깝다. 새로운 문법 내지는 컨벤션을 정의하는 대신 자바스크립트의 그것을 활용하는데 무리가 없다면 그리 한다.
 - React는 Vue.js에 비해 사용자 및 사용처에 대해 더 적은 가정을 하고, 컴포넌트 기반의 선언적 UI 렌더링이라는 가장 핵심적인 기능과 관련된 부분만 코어에 포함한다.
 
-- [[React를 Vue.js보다 선호하는 이유?]](https://ahnheejong.name/articles/why-i-prefer-react-over-vuejs/) [출처:ahn.heejong]
+- [[React를 Vue.js보다 선호하는 이유?]](https://ahnheejong.name/articles/why-i-prefer-react-over-vuejs/) 출처: ahn.heejong님

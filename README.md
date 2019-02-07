@@ -50,9 +50,7 @@ npm start
 
 - [[리액트 공식 문서] 리액트 설치](https://reactjs.org/docs/try-react.html)
 
-### 1.3
-
-React를 Vue.js보다 선호하는 이유?
+### 1.3 React를 Vue.js보다 선호하는 이유?
 
 #### 더 빠르고 담대한 개선
 

@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import YTSearch from 'youtube-api-search';
+
 import SearchBar from './components/search_bar';
 import API_KEY from './components/apiKey';
 
-console.log(API_KEY);
+YTSearch({ key: API_KEY, term: 'surfboards' }, function (data) {
+  console.log(data);
+});
 
 class App extends Component {
   render () {

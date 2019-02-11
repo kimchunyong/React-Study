@@ -5,7 +5,7 @@ import YTSearch from 'youtube-api-search';
 import SearchBar from './components/search_bar';
 import API_KEY from './components/apiKey';
 
-YTSearch({ key: API_KEY, term: 'surfboards' }, function (data) {
+YTSearch({ key: API_KEY, term: '클템' }, function (data) {
   console.log(data);
 });
 

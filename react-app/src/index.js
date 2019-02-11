@@ -1,11 +1,12 @@
-import React, { Component } from "react";
-import ReactDOM from "react-dom";
-import SearchBar from "./components/search_bar";
+import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
+import SearchBar from './components/search_bar';
+import API_KEY from './components/apiKey';
 
-const API_KEY = null;
+console.log(API_KEY);
 
 class App extends Component {
-  render() {
+  render () {
     return (
       <div>
         <SearchBar />
@@ -14,5 +15,5 @@ class App extends Component {
   }
 }
 
-const container = document.querySelector(".container");
+const container = document.querySelector('.container');
 ReactDOM.render(<App />, container);

@@ -15,7 +15,7 @@ class SearchBar extends Component {
     return (
       <div>
         <input value={this.state.term} onChange={this.onInputChange} />
-        {/*
+        {/*z
           <p>value of the input : {this.state.term}</p>
         */}
       </div>

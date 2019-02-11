@@ -1,10 +1,10 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
 class SearchBar extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { term: "" };
+    this.state = { term: '' };
   }
 
   onInputChange = event => {
@@ -14,7 +14,7 @@ class SearchBar extends Component {
   render() {
     return (
       <div>
-        <input onChange={this.onInputChange} />
+        <input value={this.state.term} onChange={this.onInputChange} />
         {/*
           <p>value of the input : {this.state.term}</p>
         */}

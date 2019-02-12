@@ -9,7 +9,7 @@ class VideoListItem extends Component {
       <li className='card'>
         <div className='video-list-media'>
           <div className='media-left'>
-            <img className='card-img-top' src={imgUrl} />
+            <img className='card-img-top' src={imgUrl} alt={title} />
           </div>
           <div className='card-body'>
             <div className='card-title'>{title}</div>

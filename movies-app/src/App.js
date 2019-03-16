@@ -24,7 +24,19 @@ const movies = [
 ];
 
 class App extends Component {
+  componentWillMount () {
+    // 1
+    // console.log(`i'm willMount!`);
+  }
+
+  componentDidMount () {
+    // 3
+    // console.log(`i'm DidMount!`);
+  }
+
   render () {
+    // 2
+    // console.log(`i'm render`);
     return (
       <div className='App'>
         {movies.map((item, index) => {

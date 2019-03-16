@@ -1,11 +1,18 @@
 import React, { Component } from 'react';
 import './Movie.css';
 import MoviePoster from './MoviePoster';
+import PorpTypes from 'prop-types';
 
 class Movie extends Component {
-  render () {
+  static porpTypes = {
+    title: PorpTypes.string.isRequired,
+    poster: PorpTypes.string.isRequired,
+  };
+
+  render() {
     return (
       <div>
+        {console.log(this)}
         <MoviePoster poster={this.props.poster} />
         <h1>
           {this.props.title}

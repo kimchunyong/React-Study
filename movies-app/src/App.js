@@ -24,23 +24,23 @@ const movies = [
 ];
 
 class App extends Component {
-  componentWillMount () {
+  componentWillMount() {
     // 1
     // console.log(`i'm willMount!`);
   }
 
-  componentDidMount () {
+  componentDidMount() {
     // 3
     // console.log(`i'm DidMount!`);
   }
 
-  render () {
+  render() {
     // 2
     // console.log(`i'm render`);
     return (
       <div className='App'>
-        {movies.map((item, index) => {
-          return <Movie title={item.title} poster={item.poster} key={index} />;
+        {movies.map((movie, index) => {
+          return <Movie title={movie.title} poster={movie.poster} key={index} />;
         })}
       </div>
     );

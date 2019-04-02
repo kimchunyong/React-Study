@@ -24,6 +24,8 @@ const movies = [
 ];
 
 class App extends Component {
+  //render : componentWillMount() => render() => componentDidMount()
+  //update : componentWillReciveProps() => shouldComponentUpdate => componentWillUpdate() => render() => ComponentDidUpdate()
   componentWillMount() {
     // 1
     // console.log(`i'm willMount!`);

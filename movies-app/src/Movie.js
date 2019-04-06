@@ -7,16 +7,15 @@ import PorpTypes from 'prop-types';
 function Movie ({ title, poster, genres, synopsis }) {
   return (
     <div className='Movie'>
-      <div class='Movie__cloums'>
-        <MoviePoster poster={poster} />
+      <div className='Movie__cloums'>
+        <MoviePoster poster={poster} alt={title} />
       </div>
-      <div class='Movie__cloums'>
+      <div className='Movie__cloums'>
         <h1>
           {title}
         </h1>
         <div className='Movie__Genres'>
           {genres.map((genre, index) => {
-            console.log(genres);
             return <MovieGenres genre={genre} key={index} />;
           })}
         </div>

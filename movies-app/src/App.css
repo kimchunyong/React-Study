@@ -1,1 +1,31 @@
-.App {}
+/*loadgin prev*/
+
+@keyframes spinner {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.App--loading .spinner {
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    border: #f00 4px solid;
+    border-left-color: transparent;
+    border-right-color: transparent;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    animation: spinner 1.5s infinite;
+}
+
+
+/*loading letter*/
+
+.App {
+    display: flex;
+}

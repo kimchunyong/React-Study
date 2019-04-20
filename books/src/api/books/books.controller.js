@@ -1,7 +1,40 @@
 const Book = require('models/book');
 
-exports.list = ctx => {
-    ctx.body = 'listed';
+exports.list = async ctx => {
+    let books;
+
+    try {
+    // exec()를 해줘야 실제 데이터베이스에 요청이감.
+        books = await Book.find().sort({ _id: -1 }).limit(1).exec();
+    } catch (e) {
+        return ctx.throw(500, e);
+    }
+
+    ctx.body = books;
+};
+
+exports.get = async ctx => {
+    const { id } = ctx.params;
+
+    let book;
+
+    try {
+        book = await Book.findById(id).exec();
+    } catch (e) {
+        if (e.name === 'CastError') {
+            ctx.status = 400;
+            return;
+        }
+        return ctx.throw(500, e);
+    }
+
+    if (!book) {
+        ctx.status = 404;
+        ctx.body = { message: 'book not found' };
+        return;
+    }
+
+    ctx.body = book;
 };
 
 exports.create = async ctx => {

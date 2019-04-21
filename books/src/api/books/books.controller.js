@@ -59,14 +59,53 @@ exports.create = async ctx => {
     ctx.body = book;
 };
 
-exports.delete = ctx => {
-    ctx.body = 'deleted';
+exports.delete = async ctx => {
+    const { id } = ctx.parms;
+    console.log(id);
+
+    try {
+        await Book.findByIdAndRemove(id).exec();
+    } catch (e) {
+        if (e.name === 'CastError') {
+            ctx.status = 400;
+            return;
+        }
+    }
+
+    ctx.status = 204; // No Content
 };
 
-exports.replace = ctx => {
-    ctx.body = 'replaced';
+exports.replace = async ctx => {
+    let book;
+
+    try {
+    // 아이디로 찾아서 업데이트를 합니다.
+    // 파라미터는 (아이디, 변경 할 값, 설정) 순 입니다.
+        book = await Book.findByIdAndUpdate(id, ctx.request.body, {
+            upsert: true,
+            new: true
+        });
+    } catch (e) {
+        return ctx.throw(500, e);
+    }
+    ctx.body = book;
 };
 
-exports.update = ctx => {
-    ctx.body = 'updated';
+exports.update = async ctx => {
+    const { id } = ctx.params;
+
+    if (!ObjectId.isValid(id)) {
+        ctx.status = 400;
+        return;
+    }
+
+    let book;
+
+    try {
+        book = await Book.findByIdAndUpdate(id, ctx.request.body, { new: true });
+    } catch (e) {
+        return ctx.throw(500, e);
+    }
+
+    ctx.body = book;
 };

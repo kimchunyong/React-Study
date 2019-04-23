@@ -7,7 +7,6 @@ class Search extends Component {
   render() {
     return (
       <div>
-        {this.state.value}
         <input type="text" onChange={this._inpTxt} />
         <button type="button" onClick={this._setQuery}>
           검색

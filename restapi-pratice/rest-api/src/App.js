@@ -1,11 +1,18 @@
 import React, { Component } from 'react';
 import './App.css';
+import Search from './Search';
 
 class App extends Component {
-  state = {};
-  componentDidMount() {
+  state = {
+    query: null,
+    bookInfo: null,
+  };
+  componentDidMount() {}
+
+  _getQueryValue = async value => {
+    await this.setState({ query: value });
     this._getBooks();
-  }
+  };
 
   _getBooks = async () => {
     const bookInfo = await this._callApi();
@@ -17,7 +24,7 @@ class App extends Component {
   _callApi = () => {
     const _apiKey = 'KakaoAK 6c01e7d9aa8f3566e902627b81bfd6a9';
     const _url = 'https://dapi.kakao.com/v3/search/book';
-    const _getQuery = `?query=미움받을 용기`;
+    const _getQuery = `?query=${this.state.query}`;
 
     const _myHeaders = new Headers();
     _myHeaders.append('Authorization', _apiKey);
@@ -33,7 +40,11 @@ class App extends Component {
       .catch(err => console.log(err));
   };
   render() {
-    return <div className="App">1</div>;
+    return (
+      <div className="App">
+        <Search books={this._callApi} query={this._getQueryValue} />
+      </div>
+    );
   }
 }
 

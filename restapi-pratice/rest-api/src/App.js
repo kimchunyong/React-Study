@@ -4,10 +4,10 @@ import './App.css';
 class App extends Component {
   state = {};
   componentDidMount() {
-    this._getMovies();
+    this._getBooks();
   }
 
-  _getMovies = async () => {
+  _getBooks = async () => {
     const bookInfo = await this._callApi();
     this.setState({
       bookInfo,

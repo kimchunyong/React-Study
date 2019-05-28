@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>그냥 평범한 리덕스</title>
+</head>
+
+<body>
+    <h1 id="number">0</h1>
+    <button id="increment">+</button>
+    <button id="decrement">-</button>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/redux/3.6.0/redux.js"></script>
+    <script>
+        const elNumber = document.getElementById('number');
+        const btnIncrement = document.getElementById('increment');
+        const btnDecrement = document.getElementById('decrement');
+
+        const INCREMENT = 'INCREMENT';
+        const DECREMENT = 'DECREMENT';
+
+        const increment = (diff) => ({
+            type: INCREMENT,
+            diff: diff
+        });
+        const decrement = () => ({
+            type: DECREMENT
+        });
+
+        const initialState = {
+            number: 0
+        };
+
+        /*
+           이것은 리듀서 함수입니다.
+           state 와 action 을 파라미터로 받아옵니다.
+           그리고 그에 따라 다음 상태를 정의 한 다음에 반환해줍니다.
+        */
+
+        const counter = (state = initialState, action) => {
+            console.log(action);
+            switch (action.type) {
+                case INCREMENT:
+                    return {
+                        number: state.number + action.diff
+                    };
+                case DECREMENT:
+                    return {
+                        number: state.number - 1
+                    };
+                default:
+                    return state;
+            }
+        }
+
+        const {
+            createStore
+        } = Redux;
+        const store = createStore(counter);
+
+        const render = () => {
+            elNumber.innerText = store.getState().number;
+            console.log('내가 실행됨');
+        }
+
+        // 스토어에 구독을하고, 뭔가 변화가 있다면, render 함수를 실행합니다.
+        store.subscribe(render);
+
+        render();
+
+        btnIncrement.addEventListener('click', () => {
+            store.dispatch(increment(25));
+        })
+
+        btnDecrement.addEventListener('click', () => {
+            store.dispatch(decrement());
+        })
+    </script>
+</body>
+
+</html>

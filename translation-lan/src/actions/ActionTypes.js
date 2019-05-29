@@ -1,0 +1,1 @@
+export const KEYBOARD_TEXT = 'KEYBOARD_TEXT';

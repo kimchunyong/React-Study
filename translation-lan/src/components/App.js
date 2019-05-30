@@ -1,8 +1,15 @@
 import React, { Component } from 'react';
+import TextArea from './TextArea';
+import TextResult from './TextResult';
 
 class App extends Component {
   render() {
-    return <div>hello react</div>;
+    return (
+      <div>
+        <TextArea />
+        <TextResult />
+      </div>
+    );
   }
 }
 

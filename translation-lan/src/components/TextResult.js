@@ -1,9 +1,17 @@
 import React, { Component } from 'react';
 
+import { connect } from 'react-redux';
+
 class TextResult extends Component {
   render() {
-    return <div>111</div>;
+    return <div>{this.props.text}</div>;
   }
 }
 
-export default TextResult;
+const mapStateToProps = state => {
+  return {
+    text: state.keyboardReducer.text,
+  };
+};
+
+export default connect(mapStateToProps)(TextResult);

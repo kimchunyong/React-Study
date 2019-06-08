@@ -2,9 +2,15 @@ import React, { Component } from 'react';
 
 import { connect } from 'react-redux';
 
+import './TextResult.css';
+
 class TextResult extends Component {
   render() {
-    return <div>{this.props.text}</div>;
+    return (
+      <div className="text__result-area">
+        <div>{this.props.text}</div>
+      </div>
+    )
   }
 }
 

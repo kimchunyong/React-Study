@@ -1,0 +1,11 @@
+.trans__btn {
+    float: left;
+    display: block;
+    width: 100%;
+    padding: 10px 0;
+    border: none;
+    background-color: #FFEB3B;
+    color: #000;
+    cursor: pointer;
+    outline-style: none;
+}

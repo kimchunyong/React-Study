@@ -7,7 +7,7 @@ class App extends Component {
     query: null,
     bookInfo: null,
   };
-  componentDidMount() {}
+  componentDidMount() { }
 
   _getQueryValue = async value => {
     await this.setState({ query: value });
@@ -39,6 +39,7 @@ class App extends Component {
       .then(json => json.documents)
       .catch(err => console.log(err));
   };
+
   render() {
     return (
       <div className="App">

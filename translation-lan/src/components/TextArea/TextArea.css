@@ -1,0 +1,13 @@
+.text__inp-area {
+    float: left;
+    width: 50%;
+}
+
+.text__inp-area>textArea {
+    display: block;
+    width: 100%;
+    height: 400px;
+    padding: 10px;
+    box-sizing: border-box;
+    resize: none;
+}

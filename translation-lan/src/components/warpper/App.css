@@ -1,0 +1,24 @@
+*,
+body {
+    font: 400 14px Arial;
+    color: #555;
+}
+
+ul,
+li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.text__wrapper {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.text__wrapper:after {
+    content: "";
+    clear: both;
+    display: block;
+}

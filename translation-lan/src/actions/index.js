@@ -5,3 +5,9 @@ export function keyDown() {
     type: types.KEYBOARD_TEXT,
   };
 }
+
+export function getTxt(){
+  return {
+    type: types.GET_TEXT,
+  }
+}

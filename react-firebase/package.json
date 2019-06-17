@@ -30,6 +30,7 @@
   },
   "devDependencies": {
     "firebase": "^6.2.0",
-    "react-router-dom": "^5.0.1"
+    "react-router-dom": "^5.0.1",
+    "recompose": "^0.30.0"
   }
 }

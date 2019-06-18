@@ -6,6 +6,7 @@ const GlobalStyle = createGlobalStyle`
     *,
     body{
         color:${props => props.theme.color};
+        box-sizing:border-box;
     }
 
     a{
@@ -14,7 +15,6 @@ const GlobalStyle = createGlobalStyle`
 
     #root{
         width:100%;
-        max-width:640px;
         margin:0 auto;
     }
 `

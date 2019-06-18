@@ -13,8 +13,26 @@ const TabMenu = styled.ul`
 `
 const MenuList = styled.li`
   display:table-cell;
-  background:#9c27b0;
 `
+
+const StyledLink = styled(
+  styled(Link)`
+    color: palevioletred;
+    display: block;
+    font-family: Helvetica, Arial, sans-serif;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  `,
+  'active'
+)`
+  padding:8px 10px;
+  border:1px solid #fff;
+  text-align:center;
+  color: #fff;
+  background:#9c27b0;
+`;
 
 const Navigation = ({ authUser }) => (
   <div className="App">{authUser ? <NavigationAuth /> : <NavigationNonAuth />}</div>
@@ -23,13 +41,13 @@ const Navigation = ({ authUser }) => (
 const NavigationAuth = () => (
   <TabMenu>
     <MenuList>
-      <Link to={ROUTES.LANDING}>Landing</Link>
+      <StyledLink to={ROUTES.LANDING}>Landing</StyledLink>
     </MenuList>
     <MenuList>
-      <Link to={ROUTES.HOME}>Home</Link>
+      <StyledLink to={ROUTES.HOME}>Home</StyledLink>
     </MenuList>
     <MenuList>
-      <Link to={ROUTES.ACCOUNT}>Account</Link>
+      <StyledLink to={ROUTES.ACCOUNT}>Account</StyledLink>
     </MenuList>
     <MenuList>
       <SignOutButton />
@@ -40,10 +58,10 @@ const NavigationAuth = () => (
 const NavigationNonAuth = () => (
   <TabMenu>
     <MenuList>
-      <Link to={ROUTES.LANDING}>Landing</Link>
+      <StyledLink to={ROUTES.LANDING}>Landing</StyledLink>
     </MenuList>
     <MenuList>
-      <Link to={ROUTES.SIGN_IN}>Sign In</Link>
+      <StyledLink to={ROUTES.SIGN_IN}>Sign In</StyledLink>
     </MenuList>
   </TabMenu>
 );

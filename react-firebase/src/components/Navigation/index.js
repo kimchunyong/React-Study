@@ -58,14 +58,7 @@ const NavigationAuth = () => (
 );
 
 const NavigationNonAuth = () => (
-  <TabMenu className="tab__header">
-    <MenuList>
-      <StyledLink activeClassName="active" exact to={ROUTES.LANDING}>Landing</StyledLink>
-    </MenuList>
-    <MenuList>
-      <StyledLink activeClassName="active" to={ROUTES.SIGN_IN}>로그인</StyledLink>
-    </MenuList>
-  </TabMenu>
+  <></>
 );
 
 export default Navigation;

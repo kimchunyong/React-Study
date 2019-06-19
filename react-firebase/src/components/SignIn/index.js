@@ -86,7 +86,7 @@ class SignInFormBase extends Component {
       .doSignInWithEmailAndPassword(email, password)
       .then(() => {
         this.setState({ ...INITIAL_STATE });
-        this.props.history.push(ROUTES.HOME);
+        this.props.history.push(ROUTES.UPLOAD);
       })
       .catch(error => {
         this.setState({ error });
@@ -124,7 +124,7 @@ class SignInFormBase extends Component {
           로그인
         </FormBtn>
 
-        {error && <CautionText>{`아이디 또는 비밀번호를 다시 확인하세요.`}<br/>{`등록되지 않은 아이디이거나, 아이디 또는 비밀번호를 잘못 입력하셨습니다.`}</CautionText>}
+        {error && <CautionText>{`아이디 또는 비밀번호를 다시 확인하세요.`}<br />{`등록되지 않은 아이디이거나, 아이디 또는 비밀번호를 잘못 입력하셨습니다.`}</CautionText>}
       </FormWrap>
     );
   }

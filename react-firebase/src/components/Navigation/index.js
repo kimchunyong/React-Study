@@ -64,7 +64,7 @@ const HambugrList = () => {
   return (
     <TabMenu className="tab__header">
       <MenuList>
-        <StyledLink activeClassName="active" exact to={ROUTES.LANDING}>Landing</StyledLink>
+        <StyledLink activeClassName="active" exact to={ROUTES.UPLOAD}>upload</StyledLink>
       </MenuList>
       <MenuList>
         <StyledLink activeClassName="active" to={ROUTES.HOME}>Home</StyledLink>

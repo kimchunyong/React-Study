@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import Navigation from '../Navigation';
 
 import LandingPage from '../Landing';
+import UpLoadPage from '../Upload';
 import SignUpPage from '../SignUp';
 import SignInPage from '../SignIn';
 import PasswordForgetPage from '../PasswordForget';
@@ -41,7 +42,10 @@ class App extends Component {
       <Router>
         <Navigation authUser={this.state.authUser} />
 
-        <Route exact path={ROUTES.LANDING} component={LandingPage} />
+        <Switch>
+          <Route exact path={ROUTES.LANDING} component={LandingPage} />
+          <Route exact path={ROUTES.UPLOAD} component={UpLoadPage} />
+        </Switch>
         <Route path={ROUTES.SIGN_UP} component={SignUpPage} />
         <Route path={ROUTES.SIGN_IN} component={SignInPage} />
         <Route path={ROUTES.PASSWORD_FORGET} component={PasswordForgetPage} />

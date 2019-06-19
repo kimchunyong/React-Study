@@ -6,6 +6,7 @@ const GlobalStyle = createGlobalStyle`
     *,
     body{
         color:${props => props.theme.color};
+        font-family: Helvetica, Arial, sans-serif;
         box-sizing:border-box;
     }
 
@@ -19,7 +20,9 @@ const GlobalStyle = createGlobalStyle`
     }
 
     a[aria-current="page"]{
-        color:#4a51dc;
+        color: #fff;
+        background: #6088ff;
+        border:1px solid #6088ff;
     }
 `
 

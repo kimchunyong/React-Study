@@ -14,20 +14,27 @@ import AdminPage from '../Admin';
 import * as ROUTES from '../../constants/routes';
 import { withFirebase } from '../Firebase';
 
+
 class App extends Component {
   state = {
     authUser: null,
+    userMail: null,
   }
 
-  componentDidMount() {
+
+  componentWillMount() {
     this.props.firebase.auth.onAuthStateChanged(authUser => {
       authUser
         ? this.setState({ authUser })
         : this.setState({ authUser: null });
+
+      this.setState({userMail:authUser.email});
+        
     });
   }
 
   render(){
+    console.log(this.state.userMail)
     return (
       <Router>
         <Navigation authUser={this.state.authUser}/>

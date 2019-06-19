@@ -9,7 +9,7 @@ import styled from 'styled-components';
 const TabMenu = styled.ul`
   display:table;
   width: 100%;
-  padding: 8px 0;
+  margin-bottom:10px;
   box-shadow: 0px 0px 4px;
 `
 const MenuList = styled.li`
@@ -23,7 +23,6 @@ const MenuListActive = styled(MenuList)`
 const StyledLink = styled(
   styled(NavLink)`
     display: block;
-    font-family: Helvetica, Arial, sans-serif;
 
     &:hover {
       text-decoration: underline;
@@ -31,7 +30,7 @@ const StyledLink = styled(
   `,
   'active'
 )`
-  padding:8px 10px;
+  padding:14px 10px;
   border:1px solid #fff;
   text-align:center;
   color: #777;
@@ -42,7 +41,7 @@ const Navigation = ({ authUser }) => (
 );
 
 const NavigationAuth = () => (
-  <TabMenu>
+  <TabMenu className="tab__header">
     <MenuList>
       <StyledLink activeClassName="active" exact to={ROUTES.LANDING}>Landing</StyledLink>
     </MenuList>
@@ -59,7 +58,7 @@ const NavigationAuth = () => (
 );
 
 const NavigationNonAuth = () => (
-  <TabMenu>
+  <TabMenu className="tab__header">
     <MenuList>
       <StyledLink activeClassName="active" exact to={ROUTES.LANDING}>Landing</StyledLink>
     </MenuList>

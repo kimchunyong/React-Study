@@ -6,6 +6,7 @@ import Firebase, { FirebaseContext } from './components/Firebase';
 
 import GlobalStyle from './resetCss';
 
+
 ReactDOM.render(
     <FirebaseContext.Provider value={new Firebase()}>
         <GlobalStyle />

@@ -22,7 +22,7 @@ class App extends Component {
   }
 
 
-  componentDidMount() {
+  componentWillMount() {
     this.props.firebase.auth.onAuthStateChanged(authUser => {
       authUser
         ? this.setState({ authUser })

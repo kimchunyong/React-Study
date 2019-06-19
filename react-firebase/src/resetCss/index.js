@@ -17,6 +17,10 @@ const GlobalStyle = createGlobalStyle`
         width:100%;
         margin:0 auto;
     }
+
+    a[aria-current="page"]{
+        color:#4a51dc;
+    }
 `
 
 GlobalStyle.defaultProps = {

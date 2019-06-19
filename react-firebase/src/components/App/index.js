@@ -1,4 +1,4 @@
-import React,{Component} from 'react';
+import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import Navigation from '../Navigation';
@@ -29,17 +29,17 @@ class App extends Component {
         : this.setState({ authUser: null });
 
       authUser
-      ? this.setState({userMail:authUser.email})
-      : this.setState({userMail: null});
-        
+        ? this.setState({ userMail: authUser.email })
+        : this.setState({ userMail: null });
+
     });
   }
 
-  render(){
+  render() {
     console.log(this.state.userMail)
     return (
       <Router>
-        <Navigation authUser={this.state.authUser}/>
+        <Navigation authUser={this.state.authUser} />
 
         <Route exact path={ROUTES.LANDING} component={LandingPage} />
         <Route path={ROUTES.SIGN_UP} component={SignUpPage} />

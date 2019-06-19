@@ -1,5 +1,5 @@
-import React from 'react';
-import { NavLink  } from 'react-router-dom';
+import React, from 'react';
+import { NavLink } from 'react-router-dom';
 
 import SignOutButton from '../SignOut';
 import * as ROUTES from '../../constants/routes';
@@ -40,22 +40,44 @@ const Navigation = ({ authUser }) => (
   <div className="App">{authUser ? <NavigationAuth /> : <NavigationNonAuth />}</div>
 );
 
-const NavigationAuth = () => (
-  <TabMenu className="tab__header">
-    <MenuList>
-      <StyledLink activeClassName="active" exact to={ROUTES.LANDING}>Landing</StyledLink>
-    </MenuList>
-    <MenuList>
-      <StyledLink activeClassName="active" to={ROUTES.HOME}>Home</StyledLink>
-    </MenuList>
-    <MenuList>
-      <StyledLink activeClassName="active" to={ROUTES.ACCOUNT}>Account</StyledLink>
-    </MenuList>
-    <MenuListActive>
-      <SignOutButton />
-    </MenuListActive>
-  </TabMenu>
-);
+const NavigationAuth = () => {
+
+  return (
+    <div>
+      <Hambuger />
+      <HambugrList />
+    </div>
+  )
+};
+
+const Hambuger = () => {
+  return (
+    <div className="hambuger_menu">
+      <span className="menu-item"></span>
+      <span className="menu-item"></span>
+      <span className="menu-item"></span>
+    </div>
+  )
+}
+
+const HambugrList = () => {
+  return (
+    <TabMenu className="tab__header">
+      <MenuList>
+        <StyledLink activeClassName="active" exact to={ROUTES.LANDING}>Landing</StyledLink>
+      </MenuList>
+      <MenuList>
+        <StyledLink activeClassName="active" to={ROUTES.HOME}>Home</StyledLink>
+      </MenuList>
+      <MenuList>
+        <StyledLink activeClassName="active" to={ROUTES.ACCOUNT}>Account</StyledLink>
+      </MenuList>
+      <MenuListActive>
+        <SignOutButton />
+      </MenuListActive>
+    </TabMenu>
+  )
+}
 
 const NavigationNonAuth = () => (
   <></>

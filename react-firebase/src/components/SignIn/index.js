@@ -51,6 +51,13 @@ const FormBtn = styled.button`
   cursor:pointer;
 `
 
+const CautionText = styled.p`
+  color:red;
+  margin:5px 0;
+  font-size:12px;
+  line-height: 16px;
+`
+
 const SignInPage = () => (
   <LoginWrap className="login__wrap">
     <LoginTitle>Login</LoginTitle>
@@ -117,7 +124,7 @@ class SignInFormBase extends Component {
           로그인
         </FormBtn>
 
-        {error && <p>{`아이디 또는 비밀번호를 다시 확인하세요.`}<br/>{`네이버에 등록되지 않은 아이디이거나, 아이디 또는 비밀번호를 잘못 입력하셨습니다.`}</p>}
+        {error && <CautionText>{`아이디 또는 비밀번호를 다시 확인하세요.`}<br/>{`등록되지 않은 아이디이거나, 아이디 또는 비밀번호를 잘못 입력하셨습니다.`}</CautionText>}
       </FormWrap>
     );
   }

@@ -22,13 +22,15 @@ class App extends Component {
   }
 
 
-  componentWillMount() {
+  componentDidMount() {
     this.props.firebase.auth.onAuthStateChanged(authUser => {
       authUser
         ? this.setState({ authUser })
         : this.setState({ authUser: null });
 
-      this.setState({userMail:authUser.email});
+      authUser
+      ? this.setState({userMail:authUser.email})
+      : this.setState({userMail: null});
         
     });
   }

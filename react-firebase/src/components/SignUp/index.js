@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
 
-import { Link, withRouter } from 'react-router-dom';
+import { NavLink, withRouter } from 'react-router-dom';
 import { compose } from 'recompose';
 
 import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../constants/routes';
+
+import styled from 'styled-components';
+
+const SignUpText = styled.p`
+    color:#555;
+`
 
 const SignUpPage = () => (
     <div>
@@ -103,9 +109,9 @@ class SignUpFormBase extends Component {
 }
 
 const SignUpLink = () => (
-    <p>
-      Don't have an account? <Link to={ROUTES.SIGN_UP}>Sign Up</Link>
-    </p>
+    <SignUpText>
+      아직 회원가입을 안하셨나요? <NavLink to={ROUTES.SIGN_UP}>Sign Up</NavLink>
+    </SignUpText>
 );
 
 const SignUpForm = compose(

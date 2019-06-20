@@ -23,23 +23,23 @@ const devConfig = {
     appId: process.env.REACT_APP_MESSAGING_APP_ID
 }
 
-const config =process.env.NODE_ENV === 'production' ? prodConfig : devConfig;
+const config = process.env.NODE_ENV === 'production' ? prodConfig : devConfig;
 
 
 class Firebase {
-    constructor(){
+    constructor() {
         App.initializeApp(config);
 
         this.auth = App.auth();
         this.storage = App.storage();
-        
+
         return this;
     }
 
     doCreateUserWithEmailAndPassword = (email, password) => {
         return this.auth.createUserWithEmailAndPassword(email, password);
     }
-        
+
     doSignInWithEmailAndPassword = (email, password) => {
         return this.auth.signInWithEmailAndPassword(email, password);
     }
@@ -49,35 +49,32 @@ class Firebase {
     }
 
     doPasswordReset = email => {
-        return  this.auth.sendPasswordResetEmail(email);
+        return this.auth.sendPasswordResetEmail(email);
     }
 
     doPasswordUpdate = password => {
-        return  this.auth.currentUser.updatePassword(password);
+        return this.auth.currentUser.updatePassword(password);
     }
 
     upLoadTask = (file) => {
-       console.log(file.name)
-        const onTask = this.storage.ref(`file/${file.name}`).put(file);
-        /*
-        onTask.on('state_changed',
-            (snapshot) =>{
+        const onTaskFile = this.storage.ref(`file/${file.name}`).put(file);
+
+        onTaskFile.on('state_changed',
+            (snapshot) => {
                 //progress
-                console.log('에러냐?')
+                console.log('progress');
             },
-            (error) =>{
+            (error) => {
                 //error
-                console.log('에러남',error)
+                console.log('에러남', error);
             },
-            (complate) =>{
+            (complate) => {
                 //complate
                 this.storage.ref('file').child(file.name).getDownloadURL().then(url => {
-                    console.log(url);
+                    console.log(url)
                 })
             },
         )
-        return onTask
-        */
     }
 
 }

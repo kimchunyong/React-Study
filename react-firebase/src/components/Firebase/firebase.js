@@ -59,22 +59,7 @@ class Firebase {
     upLoadTask = (file) => {
         const onTaskFile = this.storage.ref(`file/${file.name}`).put(file);
 
-        onTaskFile.on('state_changed',
-            (snapshot) => {
-                //progress
-                console.log('progress');
-            },
-            (error) => {
-                //error
-                console.log('에러남', error);
-            },
-            (complate) => {
-                //complate
-                this.storage.ref('file').child(file.name).getDownloadURL().then(url => {
-                    console.log(url)
-                })
-            },
-        )
+        return onTaskFile;
     }
 
 }

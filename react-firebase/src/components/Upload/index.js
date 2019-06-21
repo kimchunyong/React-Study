@@ -4,13 +4,43 @@ import { withFirebase } from '../Firebase';
 
 import styled, { keyframes } from 'styled-components';
 
+const UpLoadWraper = styled.div`
+    width:90%;
+    margin:0 auto;
+`
+
+const TitleInput = styled.input`
+    width: 100%;
+    padding: 14px;
+    margin-top: 20px;
+    border: 0;
+    border-radius: 9px;
+    border:1px solid #d2d2d2;
+`
+
+const UserNameInput = styled(TitleInput)`
+    background-color: #efefef;
+`
+
+const UserVideoTxt = styled.textarea`
+    width:100%;
+    height:200px;
+    resize:none;
+    margin-top:15px;
+    border:1px solid #d2d2d2;
+
+    &:focus{
+        border:1px solid #6088ff;
+    }
+`
+
 const DragArea = styled.div`
     position:relative;
     border: 1px dashed #ccc;
     border-radius: 15px;
-    width: 90%;
-    margin: 50px auto;
-    padding: 20px;
+    width: 100%;
+    margin: 15px auto;
+    padding: 50px 0;
     text-align: center;
 `
 
@@ -19,7 +49,7 @@ const InputFiles = styled.input`
 `
 
 const FileUploadBtn = styled.button`
-    display: inline-block;
+    display: block;
     padding: 10px;
     margin:15px auto;
     background: #ccc;
@@ -57,7 +87,15 @@ const Loader = styled.div`
         width: 10em;
         height: 10em;
     }
+`
 
+const BgMask = styled.div`
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.2);
 `
 
 
@@ -120,9 +158,25 @@ class UploadBase extends Component {
         if (isSuccess) {
             let reader = new FileReader();
             reader.readAsDataURL(fileBolb);
-
             this.setState({ file: fileBolb });
-            this.props.firebase.upLoadTask(fileBolb);
+            this.props.firebase.upLoadTask(fileBolb).on('state_changed',
+                (snapshot) => {
+                    //progress
+                    console.log('progress');
+                    this.setState({complete:true});
+                },
+                (error) => {
+                    //error
+                    console.log('에러남', error);
+                },
+                (complate) => {
+                    //complate
+                    this.props.firebase.storage.ref('file').child(fileBolb.name).getDownloadURL().then(url => {
+                        this.setState({fileUrl:url});
+                    })
+                    this.setState({complete:false});
+                },
+            );
         } else {
             alert('파일 형식에 맞지 않습니다. mp4, ogg 형식의 파일을 올려주세요.');
             this.setState({ file: '' });
@@ -147,39 +201,31 @@ class UploadBase extends Component {
         div.removeEventListener('drop', this.handleDrop);
     }
 
-    onChange(e) {
-        const fileTypes = ['mp4', 'ogg'];
-
-        const files = e.target.files[0],
-            extension = files.name.split('.').pop().toLowerCase(),
-            isSuccess = fileTypes.indexOf(extension) > -1;
-        if (isSuccess) {
-            let reader = new FileReader();
-            reader.readAsDataURL(files);
-
-            this.setState({ file: files });
-        } else {
-            alert('파일 형식에 맞지 않습니다. mp4, ogg 형식의 파일을 올려주세요.');
-            this.setState({ file: files });
-        }
-    }
-
     handleUpload = (e) => {
-        const { file } = this.state;
-
-        this.props.firebase.upLoadTask(file);
+        //firebase DB저장
     }
 
     render() {
+        let currentUser = this.props.firebase.auth.currentUser;
+        if(currentUser){
+            currentUser = this.props.firebase.auth.currentUser.email;
+        }
         return (
-            <DragArea className="drop-area" ref={this.dropRef}>
-                <p>파일을 넣어주세요.</p>
-                <div onSubmit={this.onFormSubmit}>
-                    <InputFiles type="file" name="file" onChange={(e) => { this.onChange(e) }} />
-                    <FileUploadBtn onClick={this.handleUpload}>전송</FileUploadBtn>
-                    {this.state.complete && <Loader>loading...</Loader>}
+            <UpLoadWraper>
+                <div>
+                    <TitleInput type="text" placeholder="동영상 제목을 입력해 주세요."/>
+                    <UserNameInput type="text" placeholder={currentUser} readOnly disabled/>
+                    <UserVideoTxt></UserVideoTxt>
                 </div>
-            </DragArea >
+                <DragArea className="drop-area" ref={this.dropRef}>
+                    <p>mp4,ogg 형식의 파일만 넣어주세요.</p>
+                    <div onSubmit={this.onFormSubmit}>
+                        <InputFiles accept=".mp4, .ogg," type="file" name="file"/>
+                        {this.state.complete && <BgMask><Loader>loading...</Loader></BgMask> }
+                    </div>
+                </DragArea >
+                <FileUploadBtn onClick={this.handleUpload}>전송</FileUploadBtn>
+            </UpLoadWraper>
         );
     }
 }

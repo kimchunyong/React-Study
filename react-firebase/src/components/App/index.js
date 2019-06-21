@@ -37,9 +37,8 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.state.userMail)
     return (
-      <Router>
+      <Router isLogin={this.state.isLogin}>
         <Navigation authUser={this.state.authUser} />
 
         <Switch>

@@ -107,6 +107,8 @@ class UploadBase extends Component {
         complete: false,
         fileUrl: '',
         dragging: false,
+        inpTitle: false,
+        contentsTxt: false,
     }
 
     dropRef = React.createRef();
@@ -149,6 +151,8 @@ class UploadBase extends Component {
     }
 
     fileListTrans = (files) => {
+        const { inpTitle, contentsTxt } = this.state;
+
         let fileBolb = files[0];
 
         const fileTypes = ['mp4', 'ogg'];
@@ -163,7 +167,7 @@ class UploadBase extends Component {
                 (snapshot) => {
                     //progress
                     console.log('progress');
-                    this.setState({complete:true});
+                    this.setState({ complete: true });
                 },
                 (error) => {
                     //error
@@ -172,9 +176,9 @@ class UploadBase extends Component {
                 (complate) => {
                     //complate
                     this.props.firebase.storage.ref('file').child(fileBolb.name).getDownloadURL().then(url => {
-                        this.setState({fileUrl:url});
+                        this.setState({ fileUrl: url });
                     })
-                    this.setState({complete:false});
+                    this.setState({ complete: false });
                 },
             );
         } else {
@@ -203,25 +207,39 @@ class UploadBase extends Component {
 
     handleUpload = (e) => {
         //firebase DB저장
+        const {
+            complete,
+            inpTitle,
+            contentsTxt
+
+        } = this.state;
+
+        const allComplete = complete && inpTitle && contentsTxt;
+
+        if (allComplete) {
+            // 다 입력되면 firebase DB로 정보 등록
+        }
+
+        console.log(complete, inpTitle, contentsTxt);
     }
 
     render() {
         let currentUser = this.props.firebase.auth.currentUser;
-        if(currentUser){
+        if (currentUser) {
             currentUser = this.props.firebase.auth.currentUser.email;
         }
         return (
             <UpLoadWraper>
                 <div>
-                    <TitleInput type="text" placeholder="동영상 제목을 입력해 주세요."/>
-                    <UserNameInput type="text" placeholder={currentUser} readOnly disabled/>
+                    <TitleInput type="text" placeholder="동영상 제목을 입력해 주세요." />
+                    <UserNameInput type="text" placeholder={currentUser} readOnly disabled />
                     <UserVideoTxt></UserVideoTxt>
                 </div>
                 <DragArea className="drop-area" ref={this.dropRef}>
                     <p>mp4,ogg 형식의 파일만 넣어주세요.</p>
                     <div onSubmit={this.onFormSubmit}>
-                        <InputFiles accept=".mp4, .ogg," type="file" name="file"/>
-                        {this.state.complete && <BgMask><Loader>loading...</Loader></BgMask> }
+                        <InputFiles accept=".mp4, .ogg," type="file" name="file" />
+                        {this.state.complete && <BgMask><Loader>loading...</Loader></BgMask>}
                     </div>
                 </DragArea >
                 <FileUploadBtn onClick={this.handleUpload}>전송</FileUploadBtn>

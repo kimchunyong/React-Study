@@ -73,11 +73,15 @@ class Firebase {
 
         console.log(userMail, inpTitle, contentsTxt, fileUrl);
 
-        /*
-        this.database().ref('uploadInfo/').set({
 
-        });
-        */
+        this.database.ref('uploadInfo/').set({
+            title: inpTitle,
+            contents: contentsTxt,
+            fileUrl: fileUrl,
+            userMail: userMail
+        }).then(() => {
+            //이동할 location지정하기.
+        })
     }
 
 }

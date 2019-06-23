@@ -101,14 +101,43 @@ const BgMask = styled.div`
 
 class UploadBase extends Component {
     state = {
+        userMail: null,
         file: '',
         progress: 0,
         error: false,
         complete: false,
         fileUrl: '',
         dragging: false,
-        inpTitle: false,
-        contentsTxt: false,
+        inpTitle: ['', false],
+        contentsTxt: ['', false],
+        checkUpload: false
+    }
+
+    componentDidMount() {
+        this.dragCounter = 0;
+        let div = this.dropRef.current;
+        div.addEventListener('dragenter', this.handleDragIn);
+        div.addEventListener('dragleave', this.handleDragOut);
+        div.addEventListener('dragover', this.handleDrag);
+        div.addEventListener('drop', this.handleDrop);
+
+        this.props.firebase.auth.onAuthStateChanged(authUser => {
+            authUser
+                ? this.setState({ authUser })
+                : this.setState({ authUser: null });
+
+            authUser
+                ? this.setState({ userMail: authUser.email })
+                : this.setState({ userMail: null });
+        });
+    }
+
+    componentWillUnmount() {
+        let div = this.dropRef.current
+        div.removeEventListener('dragenter', this.handleDragIn);
+        div.removeEventListener('dragleave', this.handleDragOut);
+        div.removeEventListener('dragover', this.handleDrag);
+        div.removeEventListener('drop', this.handleDrop);
     }
 
     dropRef = React.createRef();
@@ -167,7 +196,7 @@ class UploadBase extends Component {
                 (snapshot) => {
                     //progress
                     console.log('progress');
-                    this.setState({ complete: true });
+                    this.setState({ complete: true, checkUpload: false });
                 },
                 (error) => {
                     //error
@@ -178,7 +207,7 @@ class UploadBase extends Component {
                     this.props.firebase.storage.ref('file').child(fileBolb.name).getDownloadURL().then(url => {
                         this.setState({ fileUrl: url });
                     })
-                    this.setState({ complete: false });
+                    this.setState({ complete: false, checkUpload: true });
                 },
             );
         } else {
@@ -188,52 +217,55 @@ class UploadBase extends Component {
 
     }
 
+    inputTitleCheck = ({ target }) => {
+        const { value } = target;
+        const valueLen = value.length;
 
-    componentDidMount() {
-        this.dragCounter = 0;
-        let div = this.dropRef.current;
-        div.addEventListener('dragenter', this.handleDragIn);
-        div.addEventListener('dragleave', this.handleDragOut);
-        div.addEventListener('dragover', this.handleDrag);
-        div.addEventListener('drop', this.handleDrop);
+        if (!valueLen) {
+            this.setState({ inpTitle: ['', false] });
+        } else {
+            this.setState({ inpTitle: [value, true] });
+        }
     }
-    componentWillUnmount() {
-        let div = this.dropRef.current
-        div.removeEventListener('dragenter', this.handleDragIn);
-        div.removeEventListener('dragleave', this.handleDragOut);
-        div.removeEventListener('dragover', this.handleDrag);
-        div.removeEventListener('drop', this.handleDrop);
+
+    contentsTxtCheck = ({ target }) => {
+        const { value } = target;
+        const valueLen = value.length;
+
+        if (!valueLen) {
+            this.setState({ contentsTxt: ['', false] });
+        } else {
+            this.setState({ contentsTxt: [value, true] });
+        }
     }
 
     handleUpload = (e) => {
         //firebase DB저장
         const {
-            complete,
+            checkUpload,
             inpTitle,
-            contentsTxt
-
+            contentsTxt,
+            fileUrl,
+            userMail
         } = this.state;
 
-        const allComplete = complete && inpTitle && contentsTxt;
+        const allComplete = inpTitle[1] && contentsTxt[1] && checkUpload;
 
         if (allComplete) {
             // 다 입력되면 firebase DB로 정보 등록
+            this.props.firebase.setUploadInfo(userMail, inpTitle[0], contentsTxt[0], fileUrl);
+        } else {
+            alert('정보를 다 입력 해주세요.');
         }
-
-        console.log(complete, inpTitle, contentsTxt);
     }
 
     render() {
-        let currentUser = this.props.firebase.auth.currentUser;
-        if (currentUser) {
-            currentUser = this.props.firebase.auth.currentUser.email;
-        }
         return (
             <UpLoadWraper>
                 <div>
-                    <TitleInput type="text" placeholder="동영상 제목을 입력해 주세요." />
-                    <UserNameInput type="text" placeholder={currentUser} readOnly disabled />
-                    <UserVideoTxt></UserVideoTxt>
+                    <TitleInput type="text" onKeyUp={this.inputTitleCheck} placeholder="동영상 제목을 입력해 주세요." />
+                    <UserNameInput type="text" placeholder={this.state.userMail} readOnly disabled />
+                    <UserVideoTxt onKeyUp={this.contentsTxtCheck}></UserVideoTxt>
                 </div>
                 <DragArea className="drop-area" ref={this.dropRef}>
                     <p>mp4,ogg 형식의 파일만 넣어주세요.</p>

@@ -32,6 +32,7 @@ class Firebase {
 
         this.auth = App.auth();
         this.storage = App.storage();
+        this.database = App.database();
 
         return this;
     }
@@ -60,6 +61,23 @@ class Firebase {
         const onTaskFile = this.storage.ref(`file/${file.name}`).put(file);
 
         return onTaskFile;
+    }
+
+    setUploadInfo = (...upLoadInfo) => {
+        const [
+            inpTitle,
+            contentsTxt,
+            fileUrl,
+            userMail
+        ] = upLoadInfo;
+
+        console.log(userMail, inpTitle, contentsTxt, fileUrl);
+
+        /*
+        this.database().ref('uploadInfo/').set({
+
+        });
+        */
     }
 
 }

@@ -1,6 +1,8 @@
-import React from 'react';
+import React,{Component} from 'react';
 
+import { withRouter } from "react-router-dom";
 import { withFirebase } from '../Firebase';
+import * as ROUTES from '../../constants/routes';
 
 import styled from 'styled-components';
 
@@ -16,10 +18,30 @@ const Button = styled.button`
   }
 `
 
-const SignOutButton = ({ firebase }) => (
-  <Button type="button" onClick={firebase.doSignOut}>
-    로그아웃
-  </Button>
-);
+class SignOutButton extends Component {
 
-export default withFirebase(SignOutButton);
+  componentWillUnmount() {
+    const loc = this.props.history;
+    this.props.firebase.auth.onAuthStateChanged(authUser => {
+      if(!authUser){
+        loc.push(ROUTES.LANDING);
+      }
+    })
+  }
+
+  logout = () =>{
+    this.props.firebase.doSignOut();
+  }
+
+  
+
+  render() {
+      return (
+        <Button type="button" onClick={this.logout}>
+        로그아웃
+      </Button>
+      );
+  }
+}
+
+export default withFirebase(withRouter(SignOutButton));

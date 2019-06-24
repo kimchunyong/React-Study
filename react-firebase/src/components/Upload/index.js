@@ -265,7 +265,7 @@ class UploadBase extends Component {
                 .setUploadInfo(userMail, inpTitle[0], contentsTxt[0], fileUrl)
                 .then(
                     //list 보여주는 페이지로 이동되게 변경하기
-                    //()=> this.props.history.push(ROUTES.LANDING)
+                    ()=> this.props.history.push(ROUTES.LIST)
                 ).catch(
                     err => console.warn(err)
                 );

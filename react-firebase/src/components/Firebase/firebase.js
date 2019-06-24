@@ -83,7 +83,9 @@ class Firebase {
             inpTitle,
             contentsTxt,
             fileUrl,
-        });
+        })
+
+        return myRef;
     }
 
 }

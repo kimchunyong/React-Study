@@ -211,7 +211,10 @@ class UploadBase extends Component {
 
                     this.props.firebase.storage.ref(`file/${SET_UID} + ${SET_KEY}`).child(fileBolb.name).getDownloadURL().then(url => {
                         this.setState({ fileUrl: url });
-                    })
+                    }).catch(
+                        err => console.warn(err)
+                    );
+
                     this.setState({ complete: false, checkUpload: true });
                 },
             );
@@ -258,11 +261,14 @@ class UploadBase extends Component {
 
         if (allComplete) {
             // 다 입력되면 firebase DB로 정보 등록
-            this.props.firebase.setUploadInfo(userMail, inpTitle[0], contentsTxt[0], fileUrl)
-                                .then(
-                                    //list 보여주는 페이지로 이동되게 변경하기
-                                    //()=> this.props.history.push(ROUTES.LANDING)
-                                );
+            this.props.firebase
+                .setUploadInfo(userMail, inpTitle[0], contentsTxt[0], fileUrl)
+                .then(
+                    //list 보여주는 페이지로 이동되게 변경하기
+                    //()=> this.props.history.push(ROUTES.LANDING)
+                ).catch(
+                    err => console.warn(err)
+                );
         } else {
             alert('정보를 다 입력 해주세요.');
         }

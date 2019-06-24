@@ -88,6 +88,10 @@ class Firebase {
         return myRef;
     }
 
+    getUploadList = () =>{
+        console.log('get Database!!');
+    }
+
 }
 
 export default Firebase;

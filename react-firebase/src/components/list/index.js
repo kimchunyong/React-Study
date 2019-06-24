@@ -4,7 +4,7 @@ import { withFirebase } from '../Firebase';
 
 class List extends Component {
     componentDidMount() {
-        
+        this.props.firebase.getUploadList();
     }
 
     render() {

@@ -180,7 +180,7 @@ class UploadBase extends Component {
     }
 
     fileListTrans = (files) => {
-        const { inpTitle, contentsTxt } = this.state;
+        //const { inpTitle, contentsTxt } = this.state;
 
         let fileBolb = files[0];
 
@@ -204,7 +204,11 @@ class UploadBase extends Component {
                 },
                 (complate) => {
                     //complate
-                    this.props.firebase.storage.ref('file').child(fileBolb.name).getDownloadURL().then(url => {
+                    console.log('완료');
+                    const SET_UID = this.props.firebase.set_uid;
+                    const SET_KEY = this.props.firebase.set_key;
+
+                    this.props.firebase.storage.ref(`file/${SET_UID} + ${SET_KEY}`).child(fileBolb.name).getDownloadURL().then(url => {
                         this.setState({ fileUrl: url });
                     })
                     this.setState({ complete: false, checkUpload: true });

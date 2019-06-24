@@ -33,6 +33,8 @@ class Firebase {
         this.auth = App.auth();
         this.storage = App.storage();
         this.database = App.database();
+        this.set_uid = null;
+        this.set_key = null;
 
         return this;
     }
@@ -58,30 +60,30 @@ class Firebase {
     }
 
     upLoadTask = (file) => {
-        const onTaskFile = this.storage.ref(`file/${file.name}`).put(file);
+        this.set_uid = this.auth.currentUser.uid;
+        const myRef = this.database.ref(`uploadInfo`).child(this.set_uid).push();
+        let { key } = myRef;
+        this.set_key = key;
+        
+        const onTaskFile = this.storage.ref(`file/${this.set_uid} + ${this.set_key}`).child(file.name).put(file);
 
         return onTaskFile;
     }
 
     setUploadInfo = (...upLoadInfo) => {
         const [
+            userMail,
             inpTitle,
             contentsTxt,
             fileUrl,
-            userMail
         ] = upLoadInfo;
-
-        console.log(userMail, inpTitle, contentsTxt, fileUrl);
-
-
-        this.database.ref('uploadInfo/').set({
-            title: inpTitle,
-            contents: contentsTxt,
-            fileUrl: fileUrl,
-            userMail: userMail
-        }).then(() => {
-            //이동할 location지정하기.
-        })
+        
+        const myRef = this.database.ref(`uploadInfo`).child(this.set_uid + this.set_key).set({
+            userMail,
+            inpTitle,
+            contentsTxt,
+            fileUrl,
+        });
     }
 
 }

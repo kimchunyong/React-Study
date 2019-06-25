@@ -69,9 +69,6 @@ const HambugrList = () => {
       <MenuList>
         <StyledLink activeClassName="active" to={ROUTES.LIST}>동영상</StyledLink>
       </MenuList>
-      <MenuList>
-        <StyledLink activeClassName="active" to={ROUTES.ACCOUNT}>Account</StyledLink>
-      </MenuList>
       <MenuListActive>
         <SignOutButton/>
       </MenuListActive>

@@ -11,7 +11,6 @@ class List extends Component {
         this.props.firebase.getUploadList().then((dataList)=>{
             this.setState({data:dataList});
         });
-        
     }
 
     render() {

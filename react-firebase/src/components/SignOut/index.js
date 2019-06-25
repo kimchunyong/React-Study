@@ -25,6 +25,7 @@ class SignOutButton extends Component {
     this.props.firebase.auth.onAuthStateChanged(authUser => {
       if(!authUser){
         loc.push(ROUTES.LANDING);
+        localStorage.loggedIn = false;
       }
     })
   }

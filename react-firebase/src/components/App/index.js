@@ -7,7 +7,6 @@ import LandingPage from '../Landing';
 import UpLoadPage from '../Upload';
 import SignUpPage from '../SignUp';
 import SignInPage from '../SignIn';
-import PasswordForgetPage from '../PasswordForget';
 import ListPage from '../list';
 
 import * as ROUTES from '../../constants/routes';
@@ -43,7 +42,6 @@ class App extends Component {
         </Switch>
         <Route path={ROUTES.SIGN_UP} component={SignUpPage} />
         <Route path={ROUTES.SIGN_IN} component={SignInPage} />
-        <Route path={ROUTES.PASSWORD_FORGET} component={PasswordForgetPage} />
         <Route path={ROUTES.LIST} component={ListPage} />
       </Router>
     )

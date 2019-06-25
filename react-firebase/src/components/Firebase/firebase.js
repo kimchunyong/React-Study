@@ -3,6 +3,7 @@ import 'firebase/auth';
 import 'firebase/firestore';
 import 'firebase/storage';
 
+
 const prodConfig = {
     apiKey: process.env.REACT_APP_API_KEY,
     authDomain: process.env.REACT_APP_AUTH_DOMAIN,
@@ -89,7 +90,17 @@ class Firebase {
     }
 
     getUploadList = () =>{
-        console.log('get Database!!');
+        const getData = [];
+        return this.database.ref(`uploadInfo`).once('value',
+            (snapshot) => {
+                const ListData = snapshot.val();
+                for(let value in ListData) {
+                    getData.push(ListData[value]);
+                }
+            } 
+        ).then(()=>{
+            return getData;
+        })
     }
 
 }

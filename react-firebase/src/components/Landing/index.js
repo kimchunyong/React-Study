@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-import { NavLink  } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+
+import { withFirebase } from '../Firebase';
 
 import * as ROUTES from '../../constants/routes';
 
@@ -30,7 +32,7 @@ const StyledLink = styled(
     border-radius: 2em;
     background:#6088ff;
     &:hover {
-      
+
     }
   `,
   'active'
@@ -41,11 +43,20 @@ const StyledLink = styled(
   color: #fff;
 `;
 
-const LandingPage = () => (
-    <LandingWrap>
-      <LandingThums src={HipHop} alt="HipHop"/>
-      <StyledLink activeClassName="active" to={ROUTES.SIGN_IN}>로그인 하러가기</StyledLink>
-    </LandingWrap>
-);
+class LandingPage extends Component {
 
-export default LandingPage;
+  componentDidMount() {
+    this.props.firebase.doSignOut();
+  }
+
+  render() {
+    return (
+      <LandingWrap>
+        <LandingThums src={HipHop} alt="HipHop" />
+        <StyledLink activeClassName="active" to={ROUTES.SIGN_IN}>로그인 하러가기</StyledLink>
+      </LandingWrap>
+    );
+  }
+}
+
+export default withFirebase(LandingPage);

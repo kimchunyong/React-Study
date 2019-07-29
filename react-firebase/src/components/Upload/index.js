@@ -254,6 +254,7 @@ class UploadBase extends Component {
         if (allComplete) {
             // 다 입력되면 firebase DB로 정보 등록
             this.props.firebase.setUploadInfo(userMail, inpTitle[0], contentsTxt[0], fileUrl);
+            //this.props.history.push("/");
         } else {
             alert('정보를 다 입력 해주세요.');
         }

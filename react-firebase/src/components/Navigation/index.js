@@ -67,13 +67,10 @@ const HambugrList = () => {
         <StyledLink activeClassName="active" exact to={ROUTES.UPLOAD}>upload</StyledLink>
       </MenuList>
       <MenuList>
-        <StyledLink activeClassName="active" to={ROUTES.HOME}>Home</StyledLink>
-      </MenuList>
-      <MenuList>
-        <StyledLink activeClassName="active" to={ROUTES.ACCOUNT}>Account</StyledLink>
+        <StyledLink activeClassName="active" to={ROUTES.LIST}>동영상</StyledLink>
       </MenuList>
       <MenuListActive>
-        <SignOutButton />
+        <SignOutButton/>
       </MenuListActive>
     </TabMenu>
   )

@@ -88,6 +88,9 @@ class SignInFormBase extends Component {
         this.setState({ ...INITIAL_STATE });
         this.props.history.push(ROUTES.UPLOAD);
       })
+      .then(()=>{
+        localStorage.loggedIn = true;
+      })
       .catch(error => {
         this.setState({ error });
       });

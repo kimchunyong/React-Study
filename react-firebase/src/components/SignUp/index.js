@@ -14,7 +14,6 @@ const SignUpText = styled.p`
 
 const SignUpPage = () => (
     <div>
-        <h1>SignUp</h1>
         <SignUpForm />
     </div>
 );
@@ -26,6 +25,39 @@ const INITIAL_STATE = {
     passwordTwo: '',
     error: null,
 };
+
+const SignInfoForm = styled.form`
+    display: flex;
+    width: 100%;
+    height: calc(100vh - 56px);
+    flex-direction: column;
+    text-align: center;
+    margin:0 auto;
+    justify-content: center;
+    align-items: center;
+`
+
+const SinginInp = styled.input`
+    max-width: 360px;
+    width: 100%;
+    margin: 10px 0 0 0;
+    padding: 8px;
+    outline-style: none;
+    border: 1px solid #d9d9d9;
+    border-radius: 15px;
+    box-sizing: border-box;
+`
+
+const SinginBtn = styled.button`
+    width: 100%;
+    max-width: 360px;
+    margin: 10px 0;
+    padding: 8px 0;
+    background: #6088ff;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+`
 
 class SignUpFormBase extends Component {
 
@@ -46,7 +78,7 @@ class SignUpFormBase extends Component {
             .doCreateUserWithEmailAndPassword(email, passwordOne)
             .then(authUser => {
                 this.setState({ ...INITIAL_STATE });
-                this.props.history.push(ROUTES.HOME);
+                this.props.history.push(ROUTES.SIGN_IN);
             })
             .catch(error => {
                 this.setState({ error });
@@ -70,40 +102,42 @@ class SignUpFormBase extends Component {
 
 
         const isInvalid = passwordOne !== passwordTwo || passwordOne === '' || email === '' || userName === '';
+
         return (
-            <form >
-                <input
+            <SignInfoForm >
+                <h1>회원가입</h1>
+                <SinginInp
                     name="userName"
                     value={userName}
                     onChange={this.onChange}
                     type="text"
                     placeholder="Full Name"
                 />
-                <input
+                <SinginInp
                     name="email"
                     value={email}
                     onChange={this.onChange}
                     type="text"
                     placeholder="Email Address"
                 />
-                <input
+                <SinginInp
                     name="passwordOne"
                     value={passwordOne}
                     onChange={this.onChange}
                     type="password"
                     placeholder="Password"
                 />
-                <input
+                <SinginInp
                     name="passwordTwo"
                     value={passwordTwo}
                     onChange={this.onChange}
                     type="password"
                     placeholder="Confirm Password"
                 />
-                <button disabled={isInvalid} type="button" onClick={this.onClick}>Sign up</button>
+                <SinginBtn disabled={isInvalid} type="button" onClick={this.onClick}>Sign up</SinginBtn>
 
                 {error && <p>{error.message}</p>}
-            </form>
+            </SignInfoForm>
         );
     }
 }

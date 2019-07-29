@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import { withFirebase } from '../Firebase';
+import * as ROUTES from '../../constants/routes';
 
 import styled, { keyframes } from 'styled-components';
 
@@ -180,7 +181,7 @@ class UploadBase extends Component {
     }
 
     fileListTrans = (files) => {
-        const { inpTitle, contentsTxt } = this.state;
+        //const { inpTitle, contentsTxt } = this.state;
 
         let fileBolb = files[0];
 
@@ -204,9 +205,16 @@ class UploadBase extends Component {
                 },
                 (complate) => {
                     //complate
-                    this.props.firebase.storage.ref('file').child(fileBolb.name).getDownloadURL().then(url => {
+                    console.log('완료');
+                    const SET_UID = this.props.firebase.set_uid;
+                    const SET_KEY = this.props.firebase.set_key;
+
+                    this.props.firebase.storage.ref(`file/${SET_UID} + ${SET_KEY}`).child(fileBolb.name).getDownloadURL().then(url => {
                         this.setState({ fileUrl: url });
-                    })
+                    }).catch(
+                        err => console.warn(err)
+                    );
+
                     this.setState({ complete: false, checkUpload: true });
                 },
             );
@@ -253,8 +261,14 @@ class UploadBase extends Component {
 
         if (allComplete) {
             // 다 입력되면 firebase DB로 정보 등록
-            this.props.firebase.setUploadInfo(userMail, inpTitle[0], contentsTxt[0], fileUrl);
-            //this.props.history.push("/");
+            this.props.firebase
+                .setUploadInfo(userMail, inpTitle[0], contentsTxt[0], fileUrl)
+                .then(
+                    //list 보여주는 페이지로 이동되게 변경하기
+                    () => this.props.history.push(ROUTES.LIST)
+                ).catch(
+                    err => console.warn(err)
+                );
         } else {
             alert('정보를 다 입력 해주세요.');
         }

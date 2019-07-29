@@ -65,7 +65,7 @@ class Firebase {
         const myRef = this.database.ref(`uploadInfo`).child(this.set_uid).push();
         let { key } = myRef;
         this.set_key = key;
-        
+
         const onTaskFile = this.storage.ref(`file/${this.set_uid} + ${this.set_key}`).child(file.name).put(file);
 
         return onTaskFile;
@@ -78,7 +78,7 @@ class Firebase {
             contentsTxt,
             fileUrl,
         ] = upLoadInfo;
-        
+
         const myRef = this.database.ref(`uploadInfo`).child(this.set_uid + this.set_key).set({
             userMail,
             inpTitle,
@@ -89,16 +89,16 @@ class Firebase {
         return myRef;
     }
 
-    getUploadList = () =>{
+    getUploadList = () => {
         const getData = [];
         return this.database.ref(`uploadInfo`).once('value',
             (snapshot) => {
                 const ListData = snapshot.val();
-                for(let value in ListData) {
+                for (let value in ListData) {
                     getData.push(ListData[value]);
                 }
-            } 
-        ).then(()=>{
+            }
+        ).then(() => {
             return getData;
         })
     }

@@ -6,6 +6,6 @@
   "devDependencies": {
     "eslint": "^5.16.0",
     "fstream": "^1.0.12",
-    "tar": "^4.4.9"
+    "tar": "^4.4.15"
   }
 }

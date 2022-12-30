@@ -9,7 +9,7 @@
     "author": "kim",
     "license": "MIT",
     "dependencies": {
-        "next": "^8.1.0",
+        "next": "^13.1.1",
         "react": "^16.8.6",
         "react-dom": "^16.8.6"
     },
@@ -19,6 +19,6 @@
         "eslint-plugin-react": "^7.13.0",
         "eslint-plugin-react-hooks": "^1.6.0",
         "nodemon": "^1.19.0",
-        "webpack": "^4.31.0"
+        "webpack": "^5.75.0"
     }
 }
